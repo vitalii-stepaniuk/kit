@@ -1,0 +1,11 @@
+<?php
+
+function club_user_form_user_login_block_alter(&$form, &$form_state, $form_id) {
+  dpm($form);
+  $form['links']['#weight'] = 100;
+}
+
+function club_user_init() {
+  $ide = 0;
+}
+

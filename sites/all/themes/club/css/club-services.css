@@ -1,0 +1,19 @@
+/*.pane-node-field-club-services ul {
+  padding: 0;
+}
+
+.pane-node-field-club-services ul li {
+  display: inline-block;
+  border: 1px solid grey;
+  height: 32px;
+  width: 32px;
+  margin-right: 2px;
+
+  -moz-box-shadow: 0 0 5px #888;
+  -webkit-box-shadow: 0 0 5px#888;
+  box-shadow: 0 0 5px #888;
+}
+
+.pane-node-field-club-services ul li img {
+  display: inline-block;
+}*/

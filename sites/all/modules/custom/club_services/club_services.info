@@ -1,0 +1,7 @@
+; $Id$
+ 
+name = Club Services
+description = Stuff related to clubs services.
+package = Club
+core = 7.x
+

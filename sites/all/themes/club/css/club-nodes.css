@@ -1,0 +1,29 @@
+/* COMMON STYLES */
+.node .submitted {
+  margin-bottom: 10px;
+}
+
+.node-teaser .submitted {
+  font-size: 9px;
+}
+/* End of: COMMON STYLES */
+
+/* Type: ARTICLES */
+.node-article .field-name-field-image {
+  margin: 0 20px 20px 0;
+  float: left;
+}
+
+.node-article .links {
+  clear: both;
+}
+
+/* End of: Type: ARTICLES */
+
+/* Type: NEWS */
+.node-news .field-name-field-news-image {
+  margin: 0 10px 10px 0;
+  float: left;
+}
+/* End of: Type: NEWS */
+

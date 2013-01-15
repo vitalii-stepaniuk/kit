@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * This file is empty by default because the base theme chain (Alpha & Omega) provides
+ * all the basic functionality. However, in case you wish to customize the output that Drupal
+ * generates through Alpha & Omega this file is a good place to do so.
+ * 
+ * Alpha comes with a neat solution for keeping this file as clean as possible while the code
+ * for your subtheme grows. Please read the README.txt in the /preprocess and /process subfolders
+ * for more information on this topic.
+ */
+
+
+/**
+ * Implementation of phptemplate_preprocess_page().
+ */
+function club_preprocess_page(&$variables) {
+
+}
+
+function club_preprocess_node(&$variables) {
+  if (isset($variables['submitted'])) {
+    $variables['submitted'] = t('!username on !datetime', array('!username' => $variables['name'], '!datetime' => $variables['date']));
+  }
+  drupal_add_css(drupal_get_path('theme', 'club') . '/css/club-nodes.css', array('group' => CSS_THEME, 'type' => 'file'));
+}
+
+/**
+ * Implements theme_field__field_type().
+ */
+function club_field__taxonomy_term_reference($variables) {
+  $output = '';
+
+  // Render the label, if it's not hidden.
+  if (!$variables['label_hidden']) {
+    $output .= '<h3 class="field-label">' . $variables['label'] . ': </h3>';
+  }
+
+  // Render the items.
+  $output .= ($variables['element']['#label_display'] == 'inline') ? '<ul class="links inline">' : '<ul class="links">';
+  foreach ($variables['items'] as $delta => $item) {
+    $img = NULL;
+    if (isset($item['#options']['entity']->field_clubs_services_icon['und'][0]['uri'])) {
+      $path = $item['#options']['entity']->field_clubs_services_icon['und'][0]['uri'];
+      $vars = array(
+        'style_name' => 'small_icon_32x32',
+        'path' => $path,
+        'alt' => $item['#title'],
+        'title' => $item['#title'],
+      );
+      $img = theme('image_style', $vars);
+    }
+    if ($img) {
+      $link = l($img, $item['#href'], array('html' => TRUE));
+      $output .= '<li class="taxonomy-term-reference-' . $delta . '"' . $variables['item_attributes'][$delta] . '>' . $link . '</li>';
+    }
+    else {
+      $output .= '<li class="taxonomy-term-reference-' . $delta . '"' . $variables['item_attributes'][$delta] . '>' . drupal_render($item) . '</li>';
+    }
+    
+  }
+  $output .= '</ul>';
+
+  // Render the top-level DIV.
+  $output = '<div class="' . $variables['classes'] . (!in_array('clearfix', $variables['classes_array']) ? ' clearfix' : '') . '"' . $variables['attributes'] .'>' . $output . '</div>';
+
+  return $output;
+}
+
+
+function club_preprocess_views_view_grid(&$vars) {
+  if (isset($vars['column_classes'][0])) {
+    foreach ($vars['column_classes'][0] as $column_number => $classes) {
+      $vars['column_classes'][0][$column_number] .= ' grid-3 alpha';
+    }
+  }
+}

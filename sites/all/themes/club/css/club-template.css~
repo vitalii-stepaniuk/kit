@@ -1,0 +1,119 @@
+.zone-branding-wrapper {
+  margin: 10px auto 20px auto;
+}
+
+.region-branding-inner {
+  position: relative;
+}
+
+.region-branding-inner .block-user-login {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.region-branding-inner .block-user-login .block-title {
+  display: none;
+}
+
+.region-branding-inner .block-user-login .form-item,
+.region-branding-inner .block-user-login .form-actions {
+  display: inline-block;
+}
+
+.region-branding-inner .block-user-login .item-list ul li {
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+}
+
+.zone-branding-wrapper .site-name {
+  margin-top: 0;
+}
+
+.zone-branding-wrapper .site-slogan {
+  margin-top: 5px;
+}
+
+.zone-menu-wrapper {
+/*  background-color: #049dd9; */
+  border-bottom: 1px solid #049dd9;
+  margin-bottom: 20px;
+}
+
+.zone-menu-wrapper .navigation {
+  margin-bottom: -1px;
+}
+
+.navigation ul li {
+  display: inline-block;
+  border: 1px solid #049dd9;
+  padding: 0;
+}
+
+.navigation ul li.active,
+.navigation ul li:hover {
+  border-bottom: 1px solid #F2F2F2;
+}
+
+.navigation ul li a {
+  display: block;
+  text-decoration: none;
+  padding: 5px 10px;
+}
+
+.region-content-inner {
+  padding-bottom: 20px;
+}
+
+/* Article */
+article.node {
+  margin-bottom: 20px;
+}
+
+article footer {
+  font-size: 11px;
+}
+
+article .content {
+  font-size: 14px;
+}
+
+/* Footer */
+.section-footer {
+  background-color: #0378a6;
+}
+
+.section-footer .block-menu-footer-menu {
+  margin: 10px auto 60px auto;
+}
+
+.section-footer .block-menu-footer-menu ul.menu > li {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.section-footer .block-menu-footer-menu ul.menu > li > a {
+/*  text-decoration: none;
+  cursor: default; */
+  font-size: 15px;
+  color: white;
+}
+
+.section-footer .block-menu-footer-menu ul.menu > li li {
+  display: block;
+  margin: 0;
+  padding: 0;
+  line-height: 12px;
+  list-style-type: circle;
+}
+
+.section-footer .block-menu-footer-menu ul.menu > li li a {
+  cursor: pointer;
+  font-size: 13px;
+  color: #F2F2F2;
+}
+
+.section-footer .block-menu-footer-menu ul li ul {
+  margin-top: 5px;
+}

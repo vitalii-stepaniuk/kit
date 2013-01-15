@@ -1,0 +1,19 @@
+html.js .comment .links {
+  display: none;
+}
+
+.comment .user-picture {
+  float: left;
+  margin: 0 5px 0 0;
+}
+
+.comment .submitted {
+  height: 16px;
+  line-height: 24px;
+  color: #666;
+  font-size: 11px;
+}
+
+.comment .content {
+  clear: both;
+}

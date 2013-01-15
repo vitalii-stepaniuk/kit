@@ -1,0 +1,32 @@
+/* Partners view */
+.view-partners .views-view-grid tr {
+  text-align: center;
+}
+
+.view-partners .views-view-grid td {
+  height: 150px;
+}
+
+.view-partners .cell-content {
+  height: 100%;
+}
+
+/* Partner views in footer */
+.block-partners-block-1 .block-inner {
+  vertical-align: middle;
+}
+
+.block-partners-block-1 .block-title {
+  float: left;
+}
+
+.block-partners-block-1 .content {
+  float: left;
+}
+
+
+.view-display-id-block_1 .views-row {
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 40px;
+}

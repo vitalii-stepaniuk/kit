@@ -1,0 +1,53 @@
+<?php
+
+function club_weather_block_info() {
+  // This example comes from node.module.
+  $blocks['weather_informer'] = array(
+    'info' => t('Weather Informer'), 
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+function club_weather_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+  if ($delta == 'weather_informer') {
+    $content = club_weather_informer_block_content();
+    if ($content) {
+      $block['subject'] = t('Weather informer');
+      $block['content'] = $content;
+    }
+  }
+  return $block;
+}
+
+function club_weather_informer_block_content() {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $nid = arg(1);
+    $view = views_get_view_result('weather_informer', 'default', $nid);
+    if (empty($view)) return NULL;
+    return $view[0]->field_field_weather_informer_code[0]['raw']['value'];
+  }
+}
+
+function club_weather_form_weather_informer_node_form_alter(&$form, &$form_state, $form_id) {
+  $form['#validate'][] = 'club_weather_validate_club';
+}
+
+function club_weather_validate_club(&$form, &$form_state) {
+  dpm($form);
+  dpm($form_state);
+
+  if (isset($form_state['values']['field_weather_informer_club']['und'][0]['target_id'])) {
+    $club_nid = $form_state['values']['field_weather_informer_club']['und'][0]['target_id'];
+    $weather_node = $form_state['node'];
+    dpm($weather_node);
+    $view = views_get_view_result('weather_informer', 'default', $club_nid);
+    if (!empty($view)) {
+      dpm($view);
+    }
+  }
+}
+

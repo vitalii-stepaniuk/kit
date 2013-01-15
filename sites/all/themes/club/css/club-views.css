@@ -1,0 +1,71 @@
+/* Partners view */
+.view-partners .views-view-grid tr {
+  text-align: center;
+}
+
+.view-partners .views-view-grid td {
+  height: 150px;
+}
+
+.view-partners .cell-content {
+  height: 100%;
+}
+
+/* Partner views in footer */
+.view-display-id-block_1 .views-row {
+  vertical-align: middle;
+  display: inline-block;
+  margin-right: 40px;
+}
+
+/* About Author View */
+.view-id-about_author.view-display-id-block_1 .views-field-field-author-photo {
+  float: left;
+  margin: 0 20px 20px 0;
+}
+
+.view-id-about_author.view-display-id-block_1 .views-field-title {
+  font-size: 18px;
+}
+
+.view-id-about_author.view-display-id-block_1 .views-field-title a,
+.view-id-about_author.view-display-id-block_1 .views-field-title a:hover {
+  text-decoration: none;
+}
+/* End of: About Author View */
+
+/* Recent News View */
+.view-id-news.view-display-id-block_1 .views-row {
+  clear: both;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eee;
+}
+
+.view-id-news.view-display-id-block_1 .views-field-field-news-image {
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+.view-id-news.view-display-id-block_1 .views-field-created {
+  font-size: 9px;
+}
+
+.view-id-news.view-display-id-block_1 .views-field-body {
+}
+/* End of: Recent News View */
+
+/* Recent Articles View */
+.view-id-articles.view-display-id-block_1 .views-field-field-image {
+  float: left;
+  margin: 0 10px 10px 0;
+}
+
+.view-id-articles.view-display-id-block_1 .views-field-created {
+  font-size: 9px;
+}
+
+.view-id-articles.view-display-id-block_1 .views-field-body {
+  margin-left: 110px;
+}
+/* End of: Recent Articles View */

@@ -1,0 +1,14 @@
+<?php
+
+function club_comments_form_comment_form_alter(&$form, &$form_state) {
+  $form['comment_body']['#after_build'][] = 'club_comments_customize_comment_form';
+}
+
+function club_comments_customize_comment_form(&$form) {
+  $form[LANGUAGE_NONE][0]['format']['#access'] = FALSE;
+  return $form;
+}
+
+function club_comments_preprocess_comment(&$variables) {
+  unset($variables['permalink']);
+}

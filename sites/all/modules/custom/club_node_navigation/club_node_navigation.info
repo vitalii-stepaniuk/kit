@@ -1,0 +1,7 @@
+; $Id$
+ 
+name = Club Node Navigation
+description = Provide block with navigation in node.
+package = Club
+core = 7.x
+

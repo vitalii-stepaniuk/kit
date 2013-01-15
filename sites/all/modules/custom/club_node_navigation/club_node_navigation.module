@@ -1,0 +1,64 @@
+<?php
+
+function club_node_navigation_block_info() {
+  $blocks['node_navigation']['info'] = t('Node navigation');
+  $blocks['node_navigation']['cache'] = DRUPAL_NO_CACHE;
+
+  $blocks['add_content']['info'] = t('Add content');
+  $blocks['add_content']['cache'] = DRUPAL_NO_CACHE;
+  return $blocks;
+}
+
+
+function club_node_navigation_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'node_navigation':
+      $block['subject'] = t('Node navigation');
+      $block['content'] = _club_node_navigation_get_content();
+      break;
+    case 'add_content':
+      $block['subject'] = t('Add content');
+      $block['content'] = _club_node_navigation_add_content_get_content();
+      break;
+  }
+  return $block;
+}
+
+function _club_node_navigation_get_content() {
+  $content = NULL;
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $list = array();
+    $node = node_load(arg(1));
+    if ($node->type == 'club') {
+      $list[] = l(t('Description'), '', array('fragment' => 'club-description', 'external' => TRUE));
+      if (isset($node->field_club_address['und'][0])) {
+        $list[] = l(t('Map'), '', array('fragment' => 'club-map', 'external' => TRUE));
+      }
+      if (isset($node->field_club_services['und'][0])) {
+        $list[] = l(t('Services'), '', array('fragment' => 'club-services', 'external' => TRUE));
+      }
+
+      if (isset($node->field_club_how_to_get_there['und'][0])) {
+        $list[] = l(t('How to get there'), '', array('fragment' => 'club-how-to-get-there', 'external' => TRUE));
+      }
+      if (isset($node->field_club_contacts['und'][0])) {
+        $list[] = l(t('Contacts'), '', array('fragment' => 'club-contacts', 'external' => TRUE));
+      }
+      $content = theme('item_list', array('items' => $list));
+    }
+  }
+  return $content;
+}
+
+function _club_node_navigation_add_content_get_content() {
+  $content = NULL;
+  if (arg(0) == 'clubs' || arg(0) == 'clubs-on-maps') {
+    $list = array();
+    $list[] = l(t('Add club'), 'node/add/club');
+    $content = theme('item_list', array('items' => $list));
+  }
+  return $content;
+}

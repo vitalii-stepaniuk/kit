@@ -1,0 +1,6 @@
+; $Id$
+ 
+name = Club Author
+description = Stuff related to Column Authors.
+package = Club
+core = 7.x

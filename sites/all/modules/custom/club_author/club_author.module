@@ -1,0 +1,124 @@
+<?php
+
+/**
+ * Implementation of hook_block_info().
+ */
+function club_author_block_info() {
+  $blocks['about_author']['info'] = t('About Author');
+  $blocks['about_author']['cache'] = DRUPAL_NO_CACHE;
+  $blocks['author_records']['info'] = t('Author Records');
+  $blocks['author_records']['cache'] = DRUPAL_NO_CACHE;
+  return $blocks;
+}
+
+/**
+ * Implementation of hook_block_view().
+ */
+function club_author_block_view($delta = '') {
+  // This example is adapted from node.module.
+  $block = array();
+
+  switch ($delta) {
+    case 'about_author':
+      $block['subject'] = t('About Author');
+      $block['content'] = _club_author_get_about_block_content();
+      break;
+    case 'author_records':
+      $block['subject'] = t('Author Records');
+      $block['content'] = _club_author_get_author_records_block_content();
+      break;
+  }
+  return $block;
+}
+
+/**
+ * Helper function.
+ * Gets node uid and sends it to a view as an argument.
+ * Returns teaser of node (Author CT).
+ */
+function _club_author_get_about_block_content() {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+    if ($node->type == 'editorial_column') {
+      drupal_add_css(drupal_get_path('module', 'club_author') . '/css/club_author_block.css');
+      $view = views_get_view('about_author');
+      $view->set_display('block_1');
+      $view->set_arguments(array($node->uid));
+      $view->execute();
+      if (!empty($view->result)) {
+        return views_embed_view('about_author', 'block_1', $node->uid);
+      }
+      return NULL;
+    }
+    else {
+      return NULL;
+    }
+  }
+}
+
+/**
+ * Helper function.
+ */
+function _club_author_get_author_records_block_content() {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $node = node_load(arg(1));
+    if ($node->type == 'author' && isset($node->field_author_user['und'][0]['target_id'])) {
+      $uid = $node->field_author_user['und'][0]['target_id'];
+      $view = views_get_view('author_records');
+      $view->set_display('block');
+      $view->set_arguments(array($uid));
+      $view->execute();
+      if (!empty($view->result)) {
+        return views_embed_view('author_records', 'block', $uid);
+      }
+      return NULL;      
+    }
+    else {
+      return NULL;
+    }
+  }
+}
+
+/**
+ * Implementation of hook_preprocess_node().
+ */
+function club_author_preprocess_node(&$variables) {
+  if ($variables['type'] == 'author') {
+    drupal_add_css(drupal_get_path('module', 'club_author') . '/css/club_author_node.css');
+  }
+  elseif ($variables['type'] == 'editorial_column') {
+    $about_author_block = _custom_block_renderer('club_author', 'about_author');
+    if ($about_author_block) {
+      $variables['about_author'] = $about_author_block;
+    }
+  }
+}
+
+function club_author_preprocess_page(&$variables) {
+  if (arg(0) == 'authors' && is_numeric(arg(1)) && arg(2) == 'posts') {
+    $uid = arg(1);
+    $author_name = _get_author_name($uid);
+    if ($author_name) {
+      drupal_set_title(t('Posts of @author_name', array('@author_name' => $author_name)));
+    }
+  }
+}
+
+function _get_author_name($uid) {
+  $view = views_get_view('about_author');
+  $view->set_display('block_2');
+  $view->set_arguments(array($uid));
+  $view->execute();
+  if (!empty($view->result)) {
+    return $view->result[0]->node_title;
+  }
+  return NULL;
+}
+
+function _custom_block_renderer($module, $block_delta) {
+  $block = block_load($module, $block_delta);
+  $block_content = _block_render_blocks(array($block));
+  $build = _block_get_renderable_array($block_content);
+  $block_rendered = drupal_render($build);
+  return $block_rendered;
+}

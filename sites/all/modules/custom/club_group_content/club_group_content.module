@@ -1,0 +1,44 @@
+<?php
+
+function club_group_content_block_info() {
+  $blocks['group_content_create'] = array(
+    'info' => t('Create content for a group'),
+    'cache' => DRUPAL_NO_CACHE,
+  );
+
+  return $blocks;
+}
+
+function club_group_content_block_view($delta = '') {
+  $block = array();
+  if ($delta == 'group_content_create') {
+    $content = club_group_content_block_content();
+    if ($content) {
+      $block['subject'] = t('Add content');
+      $block['content'] = $content;
+    }
+  }
+  return $block;
+}
+
+function club_group_content_block_content() {
+  if (arg(0) == 'node' && is_numeric(arg(1))) {
+    $cached_data = cache_get('group_add_content_' . arg(1));
+    if ($cached_data) {
+      return $cached_data->data;
+    }
+    else {
+      $node = node_load(arg(1));
+      if (isset($node->group_group['und'][0]['value'])) {
+        dpm('Hello');
+        $content = 'Group content really';
+        cache_set('group_add_content_' . arg(1), $content);
+        return $content;
+      }
+      else {
+        return NULL;
+      }
+    }
+  }
+  return NULL;
+}

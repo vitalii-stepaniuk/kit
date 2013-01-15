@@ -1,0 +1,12 @@
+<?php
+
+/**
+ * Implementation of hook_init().
+ */
+function club_general_init() {
+  global $user;
+  if ($user->uid == 0 && drupal_is_front_page()) {
+//    drupal_goto('frontpage');
+  }
+}
+

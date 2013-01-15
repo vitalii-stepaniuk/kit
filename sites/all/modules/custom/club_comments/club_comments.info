@@ -1,0 +1,6 @@
+; $Id$
+ 
+name = Club Comments
+description = Stuff related to comments.
+package = Club
+core = 7.x
