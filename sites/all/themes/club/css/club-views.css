@@ -69,3 +69,21 @@
   margin-left: 110px;
 }
 /* End of: Recent Articles View */
+
+/**/
+.view-display-id-page_1 .views-row {
+  display: inline-block;
+  height: 200px;
+  width: 270px;
+  margin: 0 20px 20px 0;
+  vertical-align: top;
+}
+
+.view-display-id-page_1 .views-field-title {
+  margin-bottom: 10px;
+}
+
+.view-display-id-page_1 .views-field-title a {
+  text-decoration: none;
+  font-size: 16px;
+}
